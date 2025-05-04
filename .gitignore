@@ -11,8 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
-otp.tsx
-forgotpassword.tsx
+src/components/otp.tsx
+src/components/forgotpassword.tsx
+
 
 # Editor directories and files
 .vscode/*
