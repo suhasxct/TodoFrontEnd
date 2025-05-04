@@ -41,10 +41,12 @@ export function Home() {
     setloading(true);
     async function call() {
       try {
-        const response = await fetch("http://localhost:4000/graphql", {
-          method: "POST",
-          body: JSON.stringify({
-            query: `
+        const response = await fetch(
+          "https://todobackend-pro.up.railway.app/graphql",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              query: `
               query GetTodos($pageNo: Int) {
                 getTodos(pageNo: $pageNo) {
                   id
@@ -56,15 +58,16 @@ export function Home() {
                 }
               }
             `,
-            variables: {
-              pageNo: pageNo,
+              variables: {
+                pageNo: pageNo,
+              },
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              token: localStorage.getItem("token") ?? "",
             },
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            token: localStorage.getItem("token") ?? "",
-          },
-        });
+          }
+        );
         const result = await response.json();
         const temp: any = [];
         const done: any = [];

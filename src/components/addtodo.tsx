@@ -17,7 +17,7 @@ export function AddTodo() {
   async function add() {
     setshowcomp(!showcomp);
     try {
-      await fetch("http://localhost:4000/graphql", {
+      await fetch("https://todobackend-pro.up.railway.app/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

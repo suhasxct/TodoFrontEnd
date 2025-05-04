@@ -15,7 +15,7 @@ export function Todo({ prop }: { prop: any }) {
   const [status, setStatus] = useState(prop.status ? "done" : "notDone");
   async function del() {
     try {
-      await fetch("http://localhost:4000/graphql", {
+      await fetch("https://todobackend-pro.up.railway.app/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export function Todo({ prop }: { prop: any }) {
   }
   async function saveUpdates() {
     try {
-      await fetch("http://localhost:4000/graphql", {
+      await fetch("https://todobackend-pro.up.railway.app/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

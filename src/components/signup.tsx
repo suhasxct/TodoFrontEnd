@@ -14,16 +14,19 @@ export function Signup() {
     const Lastname = lastname.current.value;
     try {
       localStorage.setItem("name", Firstname);
-      const response = await fetch("http://localhost:4000/user/signup", {
-        method: "POST",
-        body: JSON.stringify({
-          email: Email,
-          password: PasswordValue,
-          firstname: Firstname,
-          lastname: Lastname,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        "https://todobackend-pro.up.railway.app/user/signup",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: Email,
+            password: PasswordValue,
+            firstname: Firstname,
+            lastname: Lastname,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       const data = await response.json();
       if (data.message == "User Created Successfully") {
         navigate("/login");

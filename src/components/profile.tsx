@@ -26,21 +26,24 @@ export function Profile() {
     reader.readAsDataURL(ref.current.files[0]);
     async function setprofile() {
       try {
-        const response = await fetch("http://localhost:4000/graphql", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            token: localStorage.getItem("token") ?? "",
-          },
-          body: JSON.stringify({
-            query: `
+        const response = await fetch(
+          "https://todobackend-pro.up.railway.app/graphql",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              token: localStorage.getItem("token") ?? "",
+            },
+            body: JSON.stringify({
+              query: `
                   mutation setprofilepic($url: String!) {
                     setprofilepic(url: $url)
                   }
                 `,
-            variables: { url: image },
-          }),
-        });
+              variables: { url: image },
+            }),
+          }
+        );
 
         const result = await response.json();
         console.log("Mutation result:", result);
@@ -54,18 +57,21 @@ export function Profile() {
     async function setprofile() {
       setloading(true);
       try {
-        const response = await fetch("http://localhost:4000/graphql", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            token: localStorage.getItem("token") ?? "",
-          },
-          body: JSON.stringify({
-            query: `
+        const response = await fetch(
+          "https://todobackend-pro.up.railway.app/graphql",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              token: localStorage.getItem("token") ?? "",
+            },
+            body: JSON.stringify({
+              query: `
                 {getprofilepic{id,profile,username,firstName,lastName}}
             `,
-          }),
-        });
+            }),
+          }
+        );
         const result = await response.json();
         setusername(result.data.getprofilepic.username);
         setfirstname(result.data.getprofilepic.firstName);
