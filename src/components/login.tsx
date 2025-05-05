@@ -57,7 +57,7 @@ export function Login() {
         </button>
         <div className="text-sm text-gray-200">or</div>
         <div className="w-full p-3 m-4">
-          <a href="https://todobackend-pro.up.railway.app/auth/google">
+          <a href="https://todobackend-pro.up.railway.app/auth/google/callback">
             <button className="w-full text-black rounded-lg bg-white hover:bg-gray-400 p-2 cursor-pointer">
               Login with Google
             </button>
