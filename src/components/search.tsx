@@ -17,10 +17,12 @@ export function Search() {
   function search() {
     async function call() {
       try {
-        const response = await fetch("http://localhost:4000/graphql", {
-          method: "POST",
-          body: JSON.stringify({
-            query: `
+        const response = await fetch(
+          "https://todobackend-pro.up.railway.app/graphql",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              query: `
                     query SearchTodos($search:String) {
                       searchTodos(search: $search) {
                         id
@@ -32,15 +34,16 @@ export function Search() {
                       }
                     }
                   `,
-            variables: {
-              search: ref.current.value,
+              variables: {
+                search: ref.current.value,
+              },
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              token: localStorage.getItem("token") ?? "",
             },
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            token: localStorage.getItem("token") ?? "",
-          },
-        });
+          }
+        );
         const result = await response.json();
         const temp: any = [];
         result.data.searchTodos.forEach((obj: any) => {
