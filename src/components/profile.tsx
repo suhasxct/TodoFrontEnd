@@ -23,7 +23,6 @@ export function Profile() {
       const base64Image = reader.result as string;
       setimage(base64Image);
       try {
-        console.log(base64Image);
         await fetch("https://todobackend-pro.up.railway.app/graphql", {
           method: "POST",
           headers: {
