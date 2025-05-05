@@ -19,39 +19,31 @@ export function Profile() {
     if (!ref.current?.files?.[0]) return;
 
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.onload = async () => {
       const base64Image = reader.result as string;
       setimage(base64Image);
-    };
-    reader.readAsDataURL(ref.current.files[0]);
-    async function setprofile() {
       try {
-        const response = await fetch(
-          "https://todobackend-pro.up.railway.app/graphql",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              token: localStorage.getItem("token") ?? "",
-            },
-            body: JSON.stringify({
-              query: `
+        console.log(base64Image);
+        await fetch("https://todobackend-pro.up.railway.app/graphql", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: localStorage.getItem("token") ?? "",
+          },
+          body: JSON.stringify({
+            query: `
                   mutation setprofilepic($url: String!) {
                     setprofilepic(url: $url)
                   }
                 `,
-              variables: { url: image },
-            }),
-          }
-        );
-
-        const result = await response.json();
-        console.log("Mutation result:", result);
+            variables: { url: base64Image },
+          }),
+        });
       } catch (error) {
         console.error("Mutation failed:", error);
       }
-    }
-    setprofile();
+    };
+    reader.readAsDataURL(ref.current.files[0]);
   }
   useEffect(() => {
     async function setprofile() {
