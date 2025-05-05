@@ -9,7 +9,7 @@ export function Profile() {
   const [firstname, setfirstname] = useState<String>("");
   const [loading, setloading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [image, setImage] = useState<string>(
+  const [image, setimage] = useState<string>(
     "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"
   );
   function press() {
@@ -21,7 +21,7 @@ export function Profile() {
     const reader = new FileReader();
     reader.onload = () => {
       const base64Image = reader.result as string;
-      setImage(base64Image);
+      setimage(base64Image);
     };
     reader.readAsDataURL(ref.current.files[0]);
     async function setprofile() {
@@ -77,7 +77,7 @@ export function Profile() {
         setfirstname(result.data.getprofilepic.firstName);
         setlastname(result.data.getprofilepic.lastName);
         if (result.data.getprofilepic.profile != null) {
-          setImage(result.data.getprofilepic.profile);
+          setimage(result.data.getprofilepic.profile);
         }
         setloading(false);
       } catch (error) {
